@@ -1,0 +1,86 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+#panDash
+{
+	-fx-background-color: linear-gradient(to bottom, #403a3e, #be5869);
+}
+.bar
+{
+	-fx-background-color: linear-gradient(to right, #403a3e, #be5869);
+}
+
+.btnstyle{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 2em; /* 12 */
+    -fx-text-fill: #828282;
+}
+
+.btnstyle:hover {
+	-fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 1, 0.5;
+    -fx-border-style: solid, segments(1, 2);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.btnstyle:pressed {
+    -fx-background-color: linear-gradient(to bottom, #8e0e00, #1f1c18);
+    -fx-text-fill: white;
+}
+
+.labelTitle
+{
+	-fx-text-fill: linear-gradient(to bottom, #403a3e, #be5869);
+}
+
+.inptText
+{
+	-fx-background-color: white;
+	-fx-border-color: linear-gradient(to bottom, #403a3e, #be5869);
+	-fx-border-width: 1, 0.5;
+    -fx-border-style: solid, segments(1, 2);
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+	 -fx-outline: 0px;
+}
+
+.inptLab
+{
+	-fx-text-fill: linear-gradient(to bottom, #403a3e, #be5869);
+	-fx-font-size: 20px;
+}
+
+.crudBtn
+{
+	-fx-background-color: linear-gradient(to bottom, #403a3e, #be5869);
+	-fx-border-color: black;
+	-fx-border-style: solid, segments(1, 2);
+	-fx-border-radius: 10px;
+	-fx-background-radius: 10px;
+	-fx-text-fill: white;
+	-fx-font-size: 15px;
+}
+
+#employerGrid
+{
+	-fx-border-color: linear-gradient(to bottom, #403a3e, #be5869);
+	-fx-background-radius: 15px;
+	-fx-border-style: solid, segments(1, 2);
+	-fx-border-radius: 10px;
+	-fx-border-width: 2, 0.5;
+}
+
+
+#imgAdmin
+{
+	
+}
+
+
+
+

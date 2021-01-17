@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 public class Database {
 
-	String  serverName = "jdbc:mysql://localhost:3306/gestion_formation";
+	String  serverName = "jdbc:mysql://localhost:3306/gastion_formation";
 	String	userName = "root";
 	String	password = "";
 	
@@ -57,7 +57,7 @@ public class Database {
 	 }
 	 
 	 
-	 public boolean insertOne(String query) throws Exception
+	 public boolean insertOne(String query) throws Exception,SQLException
 	 {
 			boolean res = false;
 		
@@ -121,14 +121,14 @@ public class Database {
 		return result;
 		}
 	 
-	public ResultSet showLists(String query){
+	public ResultSet showLists(String table_name){
 			
 		
 			try{  
 				
 			
 				 stmt = myConnection.createStatement();
-			     result = stmt.executeQuery(query);
+			     result = stmt.executeQuery("select * from "+table_name);
 			     
 			    
 			     
