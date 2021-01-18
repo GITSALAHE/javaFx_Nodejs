@@ -10,11 +10,12 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 public class DashboardController implements Initializable {
 
-	
+	//Switch Dashboard
 	@FXML
 	Button btnAcceuill;
 	
@@ -39,14 +40,17 @@ public class DashboardController implements Initializable {
 	Pane panelSession;
 	
 	
-	
-	
+
 	//Fxml:id : Gestion Employers
 		//TableView
 	@FXML
 	TableView<Employer> employerList;
 	
-	
+	@FXML TextField matriculeEmp;
+	@FXML TextField nomEmp;
+	@FXML TextField prenomEmp;
+	@FXML TextField loginEmp;
+	@FXML TextField villeEmp;
 	
 	
 	//Changement des Paneaux chez l'Administrateur

@@ -67,46 +67,6 @@
    
             </Pane>
       <Pane layoutX="266.0" prefHeight="30.0" prefWidth="720.0" styleClass="bar" stylesheets="@../css/application.css" />
-      <Pane fx:id="panelEmployer" layoutX="266.0" layoutY="30.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
-         <children>
-            <Group>
-               <children>
-                  <TableView id="employerGrid" fx:id="employerList" layoutX="80.0" layoutY="82.0" prefHeight="200.0" prefWidth="592.0" stylesheets="@../css/application.css">
-                     <columns>
-                        <TableColumn prefWidth="121.0" text="Matricule" />
-                        <TableColumn prefWidth="100.0" text="Nom" />
-                        <TableColumn prefWidth="110.0" text="Prenom" />
-                        <TableColumn prefWidth="111.0" text="Login" />
-                        <TableColumn prefWidth="147.0" text="Ville" />
-                     </columns>
-                  </TableView>
-               </children>
-            </Group>
-            <Label alignment="TOP_CENTER" layoutX="174.0" layoutY="25.0" prefHeight="18.0" prefWidth="407.0" styleClass="labelTitle" stylesheets="@../css/application.css" text="La Liste des Employers">
-               <font>
-                  <Font name="Broadway" size="26.0" />
-               </font>
-            </Label>
-            <AnchorPane />
-            <Label layoutX="225.0" layoutY="296.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Matricule" />
-            <Label layoutX="81.0" layoutY="343.0" prefHeight="30.0" prefWidth="60.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Nom" />
-            <Label layoutX="81.0" layoutY="380.0" prefHeight="30.0" prefWidth="83.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Prenom" />
-            <Label layoutX="356.0" layoutY="343.0" prefHeight="30.0" prefWidth="75.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Login : " />
-            <Label layoutX="363.0" layoutY="380.0" prefHeight="30.0" prefWidth="60.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Ville :" />
-            <TextField layoutX="343.0" layoutY="295.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <TextField layoutX="182.0" layoutY="345.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <TextField layoutX="182.0" layoutY="382.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <TextField layoutX="434.0" layoutY="344.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <TextField layoutX="434.0" layoutY="381.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Button layoutX="164.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="336.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer" />
-            <Button layoutX="511.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider" />
-         </children>
-      </Pane>
       <Pane fx:id="panelFormation" layoutX="265.0" layoutY="29.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
          <children>
             <TableView id="employerGrid" layoutX="78.0" layoutY="103.0" prefHeight="200.0" prefWidth="587.0" stylesheets="@../css/application.css">
@@ -198,6 +158,46 @@
                   <Image url="@../icons/Admin.png" />
                </image>
             </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="panelEmployer" layoutX="266.0" layoutY="30.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
+         <children>
+            <Group>
+               <children>
+                  <TableView id="employerGrid" fx:id="employerList" layoutX="80.0" layoutY="82.0" prefHeight="200.0" prefWidth="592.0" stylesheets="@../css/application.css">
+                     <columns>
+                        <TableColumn prefWidth="121.0" text="Matricule" />
+                        <TableColumn prefWidth="100.0" text="Nom" />
+                        <TableColumn prefWidth="110.0" text="Prenom" />
+                        <TableColumn prefWidth="111.0" text="Login" />
+                        <TableColumn prefWidth="147.0" text="Ville" />
+                     </columns>
+                  </TableView>
+               </children>
+            </Group>
+            <Label alignment="TOP_CENTER" layoutX="174.0" layoutY="25.0" prefHeight="18.0" prefWidth="407.0" styleClass="labelTitle" stylesheets="@../css/application.css" text="La Liste des Employers">
+               <font>
+                  <Font name="Broadway" size="26.0" />
+               </font>
+            </Label>
+            <AnchorPane />
+            <Label layoutX="225.0" layoutY="296.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Matricule" />
+            <Label layoutX="81.0" layoutY="343.0" prefHeight="30.0" prefWidth="60.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Nom" />
+            <Label layoutX="81.0" layoutY="380.0" prefHeight="30.0" prefWidth="83.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Prenom" />
+            <Label layoutX="356.0" layoutY="343.0" prefHeight="30.0" prefWidth="75.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Login : " />
+            <Label layoutX="363.0" layoutY="380.0" prefHeight="30.0" prefWidth="60.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Ville :" />
+            <TextField fx:id="matriculeEmp" layoutX="343.0" layoutY="295.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <TextField fx:id="nomEmp" layoutX="182.0" layoutY="345.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <TextField fx:id="prenomEmp" layoutX="182.0" layoutY="382.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <TextField fx:id="loginEmp" layoutX="434.0" layoutY="344.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <TextField fx:id="villeEmp" layoutX="434.0" layoutY="381.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <Button layoutX="164.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="336.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer" />
+            <Button layoutX="511.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider" />
          </children>
       </Pane>
    </children>

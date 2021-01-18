@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class AuthController implements Initializable  {
+public class AuthController implements Initializable {
 	
 	
 
