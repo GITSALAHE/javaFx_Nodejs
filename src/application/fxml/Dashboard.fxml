@@ -166,11 +166,11 @@
                <children>
                   <TableView id="employerGrid" fx:id="employerList" layoutX="80.0" layoutY="82.0" prefHeight="200.0" prefWidth="592.0" stylesheets="@../css/application.css">
                      <columns>
-                        <TableColumn prefWidth="121.0" text="Matricule" />
-                        <TableColumn prefWidth="100.0" text="Nom" />
-                        <TableColumn prefWidth="110.0" text="Prenom" />
-                        <TableColumn prefWidth="111.0" text="Login" />
-                        <TableColumn prefWidth="147.0" text="Ville" />
+                        <TableColumn fx:id="matricueCell" prefWidth="146.0" text="Matricule" />
+                        <TableColumn fx:id="nomCell" prefWidth="101.00003051757812" text="Nom" />
+                        <TableColumn fx:id="prenomCell" prefWidth="110.0" text="Prenom" />
+                        <TableColumn fx:id="loginCell" prefWidth="117.0" text="Login" />
+                        <TableColumn fx:id="villeCell" prefWidth="116.0" text="Ville" />
                      </columns>
                   </TableView>
                </children>
@@ -191,13 +191,13 @@
             <TextField fx:id="prenomEmp" layoutX="182.0" layoutY="382.0" styleClass="inptText" stylesheets="@../css/application.css" />
             <TextField fx:id="loginEmp" layoutX="434.0" layoutY="344.0" styleClass="inptText" stylesheets="@../css/application.css" />
             <TextField fx:id="villeEmp" layoutX="434.0" layoutY="381.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Button layoutX="164.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
+            <Button fx:id="btnUpdEmp" layoutX="164.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
             </Button>
-            <Button layoutX="336.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer" />
-            <Button layoutX="511.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider" />
+            <Button fx:id="btnSuppEmp" layoutX="336.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer" />
+            <Button fx:id="btnVideEmp" layoutX="511.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider" />
          </children>
       </Pane>
    </children>

@@ -1,16 +1,25 @@
 package application.controllers;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import application.models.Employer;
+import application.database.Database;
+import application.models.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 public class DashboardController implements Initializable {
@@ -27,8 +36,7 @@ public class DashboardController implements Initializable {
 	
 	@FXML
 	Button gerSession;
-	
-	
+		
 	
 	@FXML
 	Pane panelAcceuill;
@@ -39,12 +47,16 @@ public class DashboardController implements Initializable {
 	@FXML 
 	Pane panelSession;
 	
-	
-
 	//Fxml:id : Gestion Employers
 		//TableView
-	@FXML
-	TableView<Employer> employerList;
+	@FXML private TableView<Employers> employerList;
+	@FXML private TableColumn<Employers, String> matricueCell;
+	@FXML private TableColumn<Employers, String> nomCell;
+	@FXML private TableColumn<Employers, String> prenomCell;
+	@FXML private TableColumn<Employers, String> loginCell;
+	@FXML private TableColumn<Employers, String> villeCell;
+	
+	ObservableList<Employers> listEmp = FXCollections.observableArrayList();
 	
 	@FXML TextField matriculeEmp;
 	@FXML TextField nomEmp;
@@ -52,6 +64,19 @@ public class DashboardController implements Initializable {
 	@FXML TextField loginEmp;
 	@FXML TextField villeEmp;
 	
+	@FXML Button btnUpdEmp;
+	@FXML Button btnSuppEmp;
+	@FXML Button btnVideEmp;
+	
+	
+	int idSelected;
+	
+	Database database = new Database();
+	Employers employer;
+	Formation formations;
+	Session sessions;
+	
+	ResultSet result;
 	
 	//Changement des Paneaux chez l'Administrateur
 	@FXML
@@ -93,9 +118,55 @@ public class DashboardController implements Initializable {
 		}
 	}
 	
+	//----------------------------- Manipulation Crud Of Employers --------------------------------//
 	
-	
-	
+	public void showEmploye() throws SQLException {
+		
+		
+		database.connexion();
+		result = database.showLists("employers");
+		while (result.next()) {
+		
+			 employer = new Employers(result.getInt("id"), result.getString("matricule"), result.getString("nom"), result.getString("prenom"), result.getString("username"),
+					 result.getString("password"), result.getString("ville"), result.getBoolean("admin"));
+			 listEmp.add(employer);
+		}
+		
+		
+		matricueCell.setCellValueFactory(new PropertyValueFactory<>("matricule"));
+		nomCell.setCellValueFactory(new PropertyValueFactory<>("nom"));
+		prenomCell.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+		loginCell.setCellValueFactory(new PropertyValueFactory<>("login"));
+		villeCell.setCellValueFactory(new PropertyValueFactory<>("ville"));
+		
+		
+		employerList.setItems(listEmp);
+		
+		
+		employerList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				idSelected = employerList.getSelectionModel().getSelectedIndex();
+				System.out.println(idSelected);
+				int idE = employerList.getSelectionModel().getSelectedItem().getId();
+				matriculeEmp.setText(employerList.getSelectionModel().getSelectedItem().getMatricule());
+				nomEmp.setText(employerList.getSelectionModel().getSelectedItem().getNom());
+				prenomEmp.setText(employerList.getSelectionModel().getSelectedItem().getPrenom());
+				loginEmp.setText(employerList.getSelectionModel().getSelectedItem().getLogin());
+				villeEmp.setText(employerList.getSelectionModel().getSelectedItem().getVille());
+				
+				
+				
+		
+			}
+
+		});
+		
+		database.deConnexion();
+
+	}
 	
 	
 	
@@ -118,7 +189,13 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
-    	
+    	try {
+			showEmploye();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 
     }
 }
