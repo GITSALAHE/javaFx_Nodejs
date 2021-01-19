@@ -75,7 +75,7 @@ public class Database {
 			return res;
 	 }
 	 
-	 public boolean updateContractDate(String query){
+	 public boolean updateOne(String query){
 			
 		 	boolean result = false;
 		 	

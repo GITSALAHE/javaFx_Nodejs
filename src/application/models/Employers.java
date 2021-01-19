@@ -2,50 +2,30 @@ package application.models;
 
 public class Employers {
 	
-	private int id;
+
 	private String matricule;
 	private String nom;
 	private String prenom;
 	private String login;
-	private String password;
 	private String ville;
-	private boolean admin;
+
 	
 	
 	
 	
 	
 	
-	public Employers(int id, String matricule, String nom, String prenom, String login, String password, String ville, boolean d) {
+	public Employers(String matricule, String nom, String prenom, String login, String ville) {
 		
-		this.id = id;
+	
 		this.matricule = matricule;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.login = login;
-		this.password = password;
+	
 		this.ville = ville;
-		this.admin = d;
+	
 	}
-
-
-
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 
 
 
@@ -123,21 +103,6 @@ public class Employers {
 
 
 
-	public String getPassword() {
-		return password;
-	}
-
-
-
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
 
 
 
@@ -158,22 +123,6 @@ public class Employers {
 
 
 
-
-	public boolean isAdmin() {
-		return admin;
-	}
-
-
-
-
-
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-	
-	
-	
 
 	
 }

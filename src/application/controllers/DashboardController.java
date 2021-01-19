@@ -3,6 +3,7 @@ package application.controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.database.Database;
@@ -68,14 +69,28 @@ public class DashboardController implements Initializable {
 	@FXML Button btnSuppEmp;
 	@FXML Button btnVideEmp;
 	
-	
 	int idSelected;
+	
+	//Formation input //
+	@FXML private TableView<Formation> formationList;
+	@FXML private TableColumn<Formation, String> codeFormation;
+	@FXML private TableColumn<Formation, String> libelleFormation;
+	@FXML private TableColumn<Formation, String> descFormation;
+	
+	@FXML TextField txtCodeFor;
+	@FXML TextField txtLibelFor;
+	@FXML TextField txtDescFor;
+	
+	ObservableList<Formation> listFormations = FXCollections.observableArrayList();
+	
+//	btnAjoutFor;
+//	btnMdifiFor;
 	
 	Database database = new Database();
 	Employers employer;
-	Formation formations;
-	Session sessions;
-	
+	Formation formation;
+	Session session;
+	String query;
 	ResultSet result;
 	
 	//Changement des Paneaux chez l'Administrateur
@@ -127,11 +142,12 @@ public class DashboardController implements Initializable {
 		result = database.showLists("employers");
 		while (result.next()) {
 		
-			 employer = new Employers(result.getInt("id"), result.getString("matricule"), result.getString("nom"), result.getString("prenom"), result.getString("username"),
-					 result.getString("password"), result.getString("ville"), result.getBoolean("admin"));
+			 employer = new Employers(result.getString("matricule"), result.getString("nom"), result.getString("prenom"), result.getString("username"),
+					 result.getString("ville"));
 			 listEmp.add(employer);
 		}
 		
+		matriculeEmp.setDisable(true);
 		
 		matricueCell.setCellValueFactory(new PropertyValueFactory<>("matricule"));
 		nomCell.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -150,7 +166,7 @@ public class DashboardController implements Initializable {
 				
 				idSelected = employerList.getSelectionModel().getSelectedIndex();
 				System.out.println(idSelected);
-				int idE = employerList.getSelectionModel().getSelectedItem().getId();
+				
 				matriculeEmp.setText(employerList.getSelectionModel().getSelectedItem().getMatricule());
 				nomEmp.setText(employerList.getSelectionModel().getSelectedItem().getNom());
 				prenomEmp.setText(employerList.getSelectionModel().getSelectedItem().getPrenom());
@@ -169,28 +185,207 @@ public class DashboardController implements Initializable {
 	}
 	
 	
+	@FXML
+	public void updateEmployer() throws SQLException
+	{
+		database.connexion();
+		query = "UPDATE employers SET nom ='"+nomEmp.getText()+"', prenom ='"+prenomEmp.getText()+"', username='"+loginEmp.getText()+"', ville='"+villeEmp.getText()+"' "
+				+ "where matricule='"+matriculeEmp.getText()+"'";
+		boolean res = database.updateOne(query);
+		
+		if(res == true)
+		{
+			System.out.println("Update Succes");
+		}else
+		{
+			System.out.println("Update Failed");
+		}
+		
+		employer = new Employers(matriculeEmp.getText(), nomEmp.getText(), prenomEmp.getText(), loginEmp.getText(), villeEmp.getText());
+		listEmp.set(idSelected, employer);
+		
+		viderChampsEmployer();
+		
+		database.deConnexion();
+	}
 	
 	
+	public void deleteEmployer()
+	{
+		
+		 query = "DELETE FROM employers WHERE matricule='"+matriculeEmp.getText()+"'";
+		 database.connexion();
+		 boolean res = database.deleteOne(query);
+			if(res == true)
+			{
+				System.out.println("Delete Succes");
+			}else
+			{
+				System.out.println("Delete Failed");
+			}
+			
+			listEmp.remove(idSelected);
+			
+			viderChampsEmployer();
+			
+			database.deConnexion();
+	}
 	
 	
+	public void viderChampsEmployer()
+	{
+		matriculeEmp.clear();
+		nomEmp.clear();
+		prenomEmp.clear();
+		loginEmp.clear();
+		villeEmp.clear();
+	}
+	
+	//----------------------------- Manipulation Crud Of Formations --------------------------------//
+	
+		public void showFormation() throws SQLException {
+				
+				
+				database.connexion();
+				result = database.showLists("formation");
+				while (result.next()) {
+				
+					formation = new Formation(result.getString("code"), result.getString("libelle"), result.getString("description"));
+					listFormations.add(formation);
+				}
+				
+			
+				
+				codeFormation.setCellValueFactory(new PropertyValueFactory<>("code"));
+				libelleFormation.setCellValueFactory(new PropertyValueFactory<>("libelle"));
+				descFormation.setCellValueFactory(new PropertyValueFactory<>("description"));
+		
+				
+				
+				formationList.setItems(listFormations);
+				
+				
+				formationList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		
+					@Override
+					public void handle(MouseEvent arg0) {
+						
+						idSelected = formationList.getSelectionModel().getSelectedIndex();
+						
+						System.out.println(idSelected);
+						
+						txtCodeFor.setText(formationList.getSelectionModel().getSelectedItem().getCode());
+						txtLibelFor.setText(formationList.getSelectionModel().getSelectedItem().getLibelle());
+						txtDescFor.setText(formationList.getSelectionModel().getSelectedItem().getDescription());
+			
+		
+					}
+		
+				});
+				
+				database.deConnexion();
+		
+			}
+	
+		
+		
+		
+		public void insertFormation() {
+			
+			try {
+				if(txtCodeFor.getText().equals("") || txtLibelFor.getText().equals("") || txtDescFor.getText().equals(""))
+				{
+					
+				}else
+				{
+					database.connexion();
+					query = "insert into formation values ('"+txtCodeFor.getText()+"','"+txtLibelFor.getText()+"','"+txtDescFor.getText()+"')";
+					boolean res = database.insertOne(query);
+					if(res == true)
+					{
+						System.out.println("Ajout Succes");
+					}else
+					{
+						System.out.println("Ajout Failed");
+					}
+					formation = new Formation(txtCodeFor.getText(), txtLibelFor.getText(), txtDescFor.getText());
+					listFormations.add(formation);
+					
+					viderChampsFormation();
+					
+					database.deConnexion();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+		
+		public void updateFormation() throws SQLException
+		{
+			database.connexion();
+			query = "UPDATE formation SET libelle ='"+txtLibelFor.getText()+"', description ='"+txtDescFor.getText()+"' where code='"+txtCodeFor.getText()+"'";
+			boolean res = database.updateOne(query);
+			
+			if(res == true)
+			{
+				System.out.println("Update Succes");
+			}else
+			{
+				System.out.println("Update Failed");
+			}
+			
+			formation = new Formation(txtCodeFor.getText(), txtLibelFor.getText(), txtDescFor.getText());
+			listFormations.set(idSelected, formation);
+			
+			viderChampsFormation();
+			
+			database.deConnexion();
+		}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		public void deleteFormation()
+		{
+			
+			 query = "DELETE FROM formation WHERE code='"+txtCodeFor.getText()+"'";
+			 database.connexion();
+			 boolean res = database.deleteOne(query);
+				if(res == true)
+				{
+					System.out.println("Delete Succes");
+				}else
+				{
+					System.out.println("Delete Failed");
+				}
+				
+				listFormations.remove(idSelected);
+				
+				viderChampsFormation();
+
+				database.deConnexion();
+			
+		}
+		
+		public void viderChampsFormation()
+		{
+			txtCodeFor.clear();
+			txtLibelFor.clear();
+			txtDescFor.clear();
+		}
 	
 	
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
     	try {
+    		
 			showEmploye();
+			showFormation();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -67,46 +73,13 @@
    
             </Pane>
       <Pane layoutX="266.0" prefHeight="30.0" prefWidth="720.0" styleClass="bar" stylesheets="@../css/application.css" />
-      <Pane fx:id="panelFormation" layoutX="265.0" layoutY="29.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
+      <Pane fx:id="panelAcceuill" layoutX="265.0" layoutY="28.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;" stylesheets="@../css/application.css">
          <children>
-            <TableView id="employerGrid" layoutX="78.0" layoutY="103.0" prefHeight="200.0" prefWidth="587.0" stylesheets="@../css/application.css">
-               <columns>
-                  <TableColumn prefWidth="201.0" text="Code Formation" />
-                  <TableColumn prefWidth="189.0" text="Libellé" />
-                  <TableColumn prefWidth="196.0" text="Description" />
-               </columns>
-            </TableView>
-            <Label alignment="TOP_CENTER" layoutX="157.0" layoutY="54.0" prefHeight="18.0" prefWidth="407.0" styleClass="labelTitle" stylesheets="@../css/application.css" text="La Liste des Formations">
-               <font>
-                  <Font name="Broadway" size="26.0" />
-               </font>
-            </Label>
-            <Label layoutX="206.0" layoutY="334.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Code Formation :" />
-            <TextField layoutX="382.0" layoutY="333.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Label layoutX="206.0" layoutY="383.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Libellé  :" />
-            <TextField layoutX="381.0" layoutY="382.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Label layoutX="206.0" layoutY="437.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Description :" />
-            <TextField layoutX="381.0" layoutY="436.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Button layoutX="125.0" layoutY="492.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Ajouter">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="257.0" layoutY="492.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="399.0" layoutY="492.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Button>
-            <Button layoutX="538.0" layoutY="492.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Button>
+            <ImageView id="imgAdmin" fitHeight="150.0" fitWidth="248.0" layoutX="273.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/Admin.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="panelSession" layoutX="265.0" layoutY="28.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
@@ -151,13 +124,46 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="panelAcceuill" layoutX="265.0" layoutY="28.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;" stylesheets="@../css/application.css">
+      <Pane fx:id="panelFormation" layoutX="265.0" layoutY="29.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
          <children>
-            <ImageView id="imgAdmin" fitHeight="150.0" fitWidth="248.0" layoutX="273.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/Admin.png" />
-               </image>
-            </ImageView>
+            <TableView id="employerGrid" fx:id="formationList" layoutX="78.0" layoutY="103.0" prefHeight="200.0" prefWidth="587.0" stylesheets="@../css/application.css">
+               <columns>
+                  <TableColumn fx:id="codeFormation" prefWidth="201.0" text="Code Formation" />
+                  <TableColumn fx:id="libelleFormation" prefWidth="189.0" text="Libellé" />
+                  <TableColumn fx:id="descFormation" prefWidth="196.0" text="Description" />
+               </columns>
+            </TableView>
+            <Label alignment="TOP_CENTER" layoutX="157.0" layoutY="54.0" prefHeight="18.0" prefWidth="407.0" styleClass="labelTitle" stylesheets="@../css/application.css" text="La Liste des Formations">
+               <font>
+                  <Font name="Broadway" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="206.0" layoutY="334.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Code Formation :" />
+            <TextField fx:id="txtCodeFor" layoutX="382.0" layoutY="333.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <Label layoutX="206.0" layoutY="383.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Libellé  :" />
+            <TextField fx:id="txtLibelFor" layoutX="381.0" layoutY="382.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <Label layoutX="206.0" layoutY="437.0" prefHeight="24.0" prefWidth="154.0" styleClass="inptLab" stylesheets="@../css/application.css" text="Description :" />
+            <TextField fx:id="txtDescFor" layoutX="381.0" layoutY="436.0" prefHeight="27.0" prefWidth="131.0" styleClass="inptText" stylesheets="@../css/application.css" />
+            <Button fx:id="btnAjoutFor" layoutX="125.0" layoutY="492.0" mnemonicParsing="false" onAction="#insertFormation" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Ajouter">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMdifiFor" layoutX="257.0" layoutY="492.0" mnemonicParsing="false" onAction="#updateFormation" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="399.0" layoutY="492.0" mnemonicParsing="false" onAction="#deleteFormation" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Button>
+            <Button layoutX="538.0" layoutY="492.0" mnemonicParsing="false" onAction="#viderChampsFormation" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <Pane fx:id="panelEmployer" layoutX="266.0" layoutY="30.0" prefHeight="547.0" prefWidth="720.0" style="-fx-background-color: gray;">
@@ -191,13 +197,38 @@
             <TextField fx:id="prenomEmp" layoutX="182.0" layoutY="382.0" styleClass="inptText" stylesheets="@../css/application.css" />
             <TextField fx:id="loginEmp" layoutX="434.0" layoutY="344.0" styleClass="inptText" stylesheets="@../css/application.css" />
             <TextField fx:id="villeEmp" layoutX="434.0" layoutY="381.0" styleClass="inptText" stylesheets="@../css/application.css" />
-            <Button fx:id="btnUpdEmp" layoutX="164.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
+            <Button fx:id="btnUpdEmp" layoutX="164.0" layoutY="463.0" mnemonicParsing="false" onAction="#updateEmployer" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Modifier">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
             </Button>
-            <Button fx:id="btnSuppEmp" layoutX="336.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer" />
-            <Button fx:id="btnVideEmp" layoutX="511.0" layoutY="463.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider" />
+            <Button fx:id="btnSuppEmp" layoutX="336.0" layoutY="463.0" mnemonicParsing="false" onAction="#deleteEmployer" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Supprimer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <SepiaTone />
+               </effect></Button>
+            <Button fx:id="btnVideEmp" layoutX="511.0" layoutY="463.0" mnemonicParsing="false" onAction="#viderChampsEmployer" prefHeight="39.0" prefWidth="95.0" styleClass="crudBtn" stylesheets="@../css/application.css" text="Vider">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow />
+               </effect></Button>
          </children>
       </Pane>
    </children>
