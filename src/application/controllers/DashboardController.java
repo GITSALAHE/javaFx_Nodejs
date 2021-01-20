@@ -97,7 +97,7 @@ public class DashboardController implements Initializable {
 	@FXML
 	public void manipulation(ActionEvent mouseEvent)throws Exception{
 		
-		// Affichage Par Défaut
+		// Affichage Par Dï¿½faut
 		panelAcceuill.setVisible(true);
 		panelEmployer.setVisible(false);
 		panelFormation.setVisible(false);

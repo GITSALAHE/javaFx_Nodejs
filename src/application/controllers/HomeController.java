@@ -1,5 +1,7 @@
 package application.controllers;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +20,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+
+import java.awt.Desktop;
+import java.io.IOException;
+
 
 public class HomeController implements Initializable {
 	
@@ -36,7 +44,9 @@ public class HomeController implements Initializable {
 	@FXML Label descForm;
 	@FXML Label libelSession;
 	
-	
+	@FXML
+	private WebView mapsView;
+
 	Database database = new Database();
 	ResultSet result;
 	
@@ -72,19 +82,7 @@ public class HomeController implements Initializable {
 			comboFormation.setItems(valueCombo1);
 			comboFormation.getSelectionModel().selectFirst();
 			
-			for(int i=0; i < formations.size(); i++)
-			{
-				if(comboFormation.getSelectionModel().getSelectedItem().equals(formations.get(i).getCode()))
-				{
-					
-					libelForm.setText(formations.get(i).getLibelle());
-					descForm.setText(formations.get(i).getDescription());
-				}
-				
-			}
-	
-			
-
+		
 			comboFormation.valueProperty().addListener(new ChangeListener<String>() {
 				
 		        @Override public void changed(ObservableValue ov, String t, String t1) {
@@ -135,7 +133,19 @@ public class HomeController implements Initializable {
 	
 
 	
-	
+	public void getSession() {
+        String formCode = comboFormation.getValue();
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            desktop.browse(new URI("http://localhost:3000/formation/"+formCode));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 	
 	
 	
@@ -161,11 +171,12 @@ public class HomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	
     	try {
-			showAll();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e) {
+            showAll();
+			WebEngine web  = mapsView.getEngine();
+			web.setJavaScriptEnabled(true);
+			web.load(getClass().getResource("../index.html").toString());
+        }
+        catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

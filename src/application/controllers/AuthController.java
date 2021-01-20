@@ -80,7 +80,7 @@ public class AuthController implements Initializable {
 			if(txtNom.getText().equals("") || txtPrenom.getText().equals("") || txtVille.getText().equals("") 
 					|| txtUsername.getText().equals("") || txtMotDePass.getText().equals("") || txtConfirmPass.getText().equals(""))
 			{
-				AuthChek.setText("Veulliez Remplir Tous les Champs pour Crée un Compte ");
+				AuthChek.setText("Veulliez Remplir Tous les Champs pour Crï¿½e un Compte ");
 				AuthChek.setTextFill(Color.RED);
 			}else
 			{
@@ -98,7 +98,7 @@ public class AuthController implements Initializable {
 					if(res == true) {
 						loadEffect.setVisible(true);
 						
-						AuthChek.setText("Ajout Effectué avec Succes");
+						AuthChek.setText("Ajout Effectuï¿½ avec Succes");
 						AuthChek.setTextFill(Color.GREEN);
 						loadEffect.setVisible(false);
 					}	
