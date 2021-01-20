@@ -2,5 +2,5 @@ module.exports = {
   HOST: "localhost",
   USER: "root",
   PASSWORD: "",
-  DB: "gestion"
+  DB: "gastion_formation"
 };
